@@ -48,7 +48,7 @@
                 <td>${user.id}</td>
                 <td>${user.userName}</td>
                 <td>${user.pwd}</td>
-                <td>${user.sex}</td>
+                <td>${user.sex==1?"男":"女"}</td>
                 <td>${user.date}</td>
                 <td>${user.address}</td>
                     <%--下面这2种写法 传递的参数在地址栏是可见的  不安全--%>

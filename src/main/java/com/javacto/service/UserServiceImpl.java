@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User queryUserByName(String userName) {
+        return userDao.queryUserByName(userName);
+    }
+
+    @Override
     public int getTotalCount() {
         return userDao.getTotalCount();
     }

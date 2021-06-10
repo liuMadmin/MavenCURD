@@ -36,6 +36,11 @@ public interface UserService {
 
     public List<Object> queryAll2();
 
+    /**
+     * 根据userName查询
+     */
+    public User queryUserByName(String userName);
+
     /*
      * 获取总条数据
      * */

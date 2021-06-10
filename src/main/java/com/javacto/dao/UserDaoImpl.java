@@ -21,8 +21,8 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public int addUser(User user) {
-        String sql = "INSERT INTO TUSER(t_name,t_password,t_sex,t_date,t_address,t_state) VALUES(?,'123',?,NOW(),?,0)";
-        Object arr[] = {user.getUserName(),user.getSex(),user.getAddress()};
+        String sql = "INSERT INTO TUSER(t_name,t_password,t_sex,t_date,t_address,t_state) VALUES(?,?,?,NOW(),?,0)";
+        Object arr[] = {user.getUserName(),user.getPwd(),user.getSex(),user.getAddress()};
         return BaseDao.myExecuteUpdate(sql,arr);
     }
 
@@ -35,8 +35,8 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public int updateUser(User user) {
-        String sql = "UPDATE TUSER SET t_name=?,t_sex=?,t_address=? WHERE  t_id=?";
-        Object arr[] = {user.getUserName(),user.getSex(),user.getAddress(),user.getId()};
+        String sql = "UPDATE TUSER SET t_name=?,t_password=?,t_sex=?,t_address=? WHERE  t_id=?";
+        Object arr[] = {user.getUserName(),user.getPwd(),user.getSex(),user.getAddress(),user.getId()};
         return BaseDao.myExecuteUpdate(sql,arr);
     }
 
@@ -44,6 +44,36 @@ public class UserDaoImpl implements UserDao{
     public List<Object> queryUserByID(int id) {
         String sql = "SELECT * FROM TUSER WHERE t_id=?";
         return BaseDao.myExecuteQuery(sql,id);
+    }
+
+    @Override
+    public User queryUserByName(String userName) {
+        User user = null;
+        String sql = "SELECT * FROM TUSER WHERE t_name = ?";
+        try {
+            coon = JDBCUtils.getDataSource().getConnection();
+            pstmt = coon.prepareStatement(sql);
+            pstmt.setString(1,userName);
+            rs = pstmt.executeQuery();
+            while (rs.next()){
+                user = new User();
+                user.setId(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setPwd(rs.getString(3));
+                user.setSex(rs.getInt(4));
+                user.setDate(rs.getDate(5));
+                user.setAddress(rs.getString(6));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                JDBCUtils.close(coon,pstmt,rs);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return user;
     }
 
     @Override

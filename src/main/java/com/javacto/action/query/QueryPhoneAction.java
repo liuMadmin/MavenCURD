@@ -30,6 +30,6 @@ public class QueryPhoneAction extends HttpServlet {
 
         list = phoneService.queryAll();
         req.setAttribute("Phones",list);
-        req.getRequestDispatcher("/successPhone.jsp").forward(req,resp);
+        req.getRequestDispatcher("/pageQueryPhone.jsp").forward(req,resp);
     }
 }

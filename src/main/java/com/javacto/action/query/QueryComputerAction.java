@@ -30,6 +30,6 @@ public class QueryComputerAction extends HttpServlet {
 
         list = computerService.queryAll();
         req.setAttribute("Computers",list);
-        req.getRequestDispatcher("/successComputer.jsp").forward(req,resp);
+        req.getRequestDispatcher("/pageQueryComputer.jsp").forward(req,resp);
     }
 }

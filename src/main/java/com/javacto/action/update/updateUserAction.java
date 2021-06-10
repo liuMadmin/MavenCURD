@@ -29,6 +29,7 @@ public class updateUserAction extends HttpServlet {
         String userName = req.getParameter("userName");
         String strSex = req.getParameter("sex");
         int sex = Integer.parseInt(strSex);
+        String pwd = req.getParameter("pwd");
         String address = req.getParameter("address");
 
         User user = new User();
@@ -36,6 +37,7 @@ public class updateUserAction extends HttpServlet {
         user.setUserName(userName);
         user.setSex(sex);
         user.setAddress(address);
+        user.setPwd(pwd);
 
         UserService userService = new UserServiceImpl();
         userService.updateUser(user);

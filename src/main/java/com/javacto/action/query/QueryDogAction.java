@@ -30,6 +30,6 @@ public class QueryDogAction extends HttpServlet {
 
         list = dogService.queryAll();
         req.setAttribute("Dogs",list);
-        req.getRequestDispatcher("/successDog.jsp").forward(req,resp);
+        req.getRequestDispatcher("/pageQueryDog.jsp").forward(req,resp);
     }
 }

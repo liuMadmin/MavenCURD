@@ -24,6 +24,10 @@ public interface UserDao {
      */
     public List<Object> queryUserByID(int id);
 
+    /**
+     * 根据userName查询
+     */
+    public User queryUserByName(String userName);
 
     /**
      * 修改
